@@ -36,6 +36,9 @@ namespace SuperBreakout
         [SerializeField]
         AudioClip LoseJingle;
 
+        [SerializeField]
+        AudioClip _loseLifeSound;
+
         public int CurrentLevel { private set; get; }
         public int CurrentScore { private set; get; }
         public int CurrentLives { private set; get; }
@@ -60,6 +63,7 @@ namespace SuperBreakout
             Application.targetFrameRate = 60;
 
             Util.SubscribeToEvent(Util.CommonEvents.NEW_GAME, NewGame);
+            Util.SubscribeToEvent(Util.CommonEvents.BRICK_DESTROYED, OnBrickDestroyed);
 
             SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -78,18 +82,18 @@ namespace SuperBreakout
         void NewGame()
         {
             SetLevel(0);
-            SetScore(0);            
+            SetScore(0);
             SetLives(1);
 
             SetGameLevel(_campaign.Levels[CurrentLevel]);
-            
+
         }
 
         void GoToNextLevel()
         {
             CurrentLevel++;
 
-            if(_campaign.Levels.Count <= CurrentLevel)
+            if (_campaign.Levels.Count <= CurrentLevel)
             {
                 GoToMainMenu();
                 return;
@@ -106,7 +110,7 @@ namespace SuperBreakout
 
         #endregion
 
-              #region  Gamewide Scene Management
+        #region  Gamewide Scene Management
         void OnSceneLoaded(Scene loadedScene, LoadSceneMode mode)
         {
             UILoadingWindow.Instance?.RemoveLoader(UILoadingWindow.CommonLoadOperations.LOAD_SCENE);
@@ -240,6 +244,9 @@ namespace SuperBreakout
                 return;
             }
 
+
+            SoundManager.Instance.PlaySound(Instance._loseLifeSound);
+
             Instance.CurrentLives--;
             if (Instance.CurrentLives <= 0)
             {
@@ -247,6 +254,15 @@ namespace SuperBreakout
             }
         }
 
+        void OnBrickDestroyed()
+        {
+            if (BrickEntity.BricksInSession == null) return;
+
+            if (BrickEntity.BricksInSession.Count > 0) return;
+
+            WinLevel();
+        }
+        
         void WinLevel()
         {
             if (_winLevelRoutineInstance != null) StopCoroutine(_winLevelRoutineInstance);
@@ -258,7 +274,7 @@ namespace SuperBreakout
         IEnumerator WinLevelRoutine()
         {
             SoundManager.Instance.PlaySound(WinJingle);
-            Time.timeScale = 0f;
+            Time.timeScale = 0.5f;
 
             yield return new WaitForSecondsRealtime(3f);
 
@@ -280,7 +296,7 @@ namespace SuperBreakout
         IEnumerator LoseLevelRoutine()
         {
             SoundManager.Instance.PlaySound(LoseJingle);
-            Time.timeScale = 0f;
+            Time.timeScale = 0.5f;
 
             yield return new WaitForSecondsRealtime(3f);
 

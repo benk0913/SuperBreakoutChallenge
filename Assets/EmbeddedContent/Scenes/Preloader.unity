@@ -286,25 +286,38 @@ MonoBehaviour:
         ActionsOnEvent:
         - {fileID: 11400000, guid: 620d370e170d62c40802c4d2705b1dae, type: 2}
         - {fileID: 11400000, guid: b19b9c9a7e0050842bb50d4de78f3b41, type: 2}
-      - TimeSinceLevelStart: 8
+      - TimeSinceLevelStart: 16
         ActionsOnEvent:
         - {fileID: 11400000, guid: 9441dc6662e300743b5692979d68ff91, type: 2}
         - {fileID: 11400000, guid: 8711146534a99df4382f0834502d2ed1, type: 2}
-      - TimeSinceLevelStart: 16
-        ActionsOnEvent:
-        - {fileID: 11400000, guid: 8e494832527afb242a8a20b3fb3b740c, type: 2}
-        - {fileID: 11400000, guid: 8711146534a99df4382f0834502d2ed1, type: 2}
-      - TimeSinceLevelStart: 24
-        ActionsOnEvent:
-        - {fileID: 11400000, guid: 9fc4dd41f62245247b28c611a76a8bac, type: 2}
-        - {fileID: 11400000, guid: 94fba0ca7bc3113459fd7b1ca6baedbc, type: 2}
       - TimeSinceLevelStart: 32
         ActionsOnEvent:
-        - {fileID: 11400000, guid: bab76083aaf193f418e381b74e94034f, type: 2}
+        - {fileID: 11400000, guid: 9fc4dd41f62245247b28c611a76a8bac, type: 2}
         - {fileID: 11400000, guid: 94fba0ca7bc3113459fd7b1ca6baedbc, type: 2}
       - TimeSinceLevelStart: 40
         ActionsOnEvent:
         - {fileID: 11400000, guid: e594a3b6d8487794e8595fe4e2eb96d4, type: 2}
+    - LevelSceneKey: Level 2
+      Lives: 5
+      TimeLineEvents:
+      - TimeSinceLevelStart: 0
+        ActionsOnEvent:
+        - {fileID: 11400000, guid: 620d370e170d62c40802c4d2705b1dae, type: 2}
+        - {fileID: 11400000, guid: b19b9c9a7e0050842bb50d4de78f3b41, type: 2}
+      - TimeSinceLevelStart: 16
+        ActionsOnEvent:
+        - {fileID: 11400000, guid: 9441dc6662e300743b5692979d68ff91, type: 2}
+        - {fileID: 11400000, guid: 8711146534a99df4382f0834502d2ed1, type: 2}
+      - TimeSinceLevelStart: 32
+        ActionsOnEvent:
+        - {fileID: 11400000, guid: 9fc4dd41f62245247b28c611a76a8bac, type: 2}
+        - {fileID: 11400000, guid: 94fba0ca7bc3113459fd7b1ca6baedbc, type: 2}
+      - TimeSinceLevelStart: 40
+        ActionsOnEvent:
+        - {fileID: 11400000, guid: e594a3b6d8487794e8595fe4e2eb96d4, type: 2}
+  WinJingle: {fileID: 8300000, guid: 348ed11b094e3c9418a67964f7ce083b, type: 3}
+  LoseJingle: {fileID: 8300000, guid: aa848354351c1944cbdaf109e1dc27b5, type: 3}
+  _loseLifeSound: {fileID: 8300000, guid: 9a47b05742880b640a70f0a252639ddd, type: 3}
 --- !u!114 &232574811
 MonoBehaviour:
   m_ObjectHideFlags: 0

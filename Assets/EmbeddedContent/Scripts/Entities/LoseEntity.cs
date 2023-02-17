@@ -6,13 +6,13 @@ namespace SuperBreakout
 {
     public class LoseEntity : MonoBehaviour
     {
-        void OnCollisionEnter2D(Collision2D collision)
+        void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collision.collider.tag != BallEntity.BALL_TAG) return;
+            if (collider.tag != BallEntity.BALL_TAG) return;
 
             GameManager.LoseLife();
 
-            collision.collider.GetComponent<BallEntity>().Respawn();
+            collider.GetComponent<BallEntity>().Respawn();
         }
 
     }

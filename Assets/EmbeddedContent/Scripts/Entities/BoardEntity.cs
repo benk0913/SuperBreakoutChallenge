@@ -9,6 +9,8 @@ namespace SuperBreakout
         const float BASE_BOARD_WIDTH = 1.365394f;
         const float BASE_BOARD_HEIGHT = 0.2928521f;
 
+        public const string BOARD_TAG = "Board";
+
         public static BoardEntity? CurrentBoard;
 
         #region  Parameters 

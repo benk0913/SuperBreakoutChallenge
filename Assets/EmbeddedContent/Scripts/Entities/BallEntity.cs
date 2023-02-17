@@ -37,6 +37,11 @@ namespace SuperBreakout
         [Tooltip("Respawn Sound")]
         AudioClip _respawnSound;
 
+        [SerializeField]
+        [Tooltip("Should the ball go to a random direction when it spawns?")]
+        bool _isRandomDirectionAtSpawn;
+
+
 
         float _modifiedScale = 1f;
 
@@ -66,13 +71,14 @@ namespace SuperBreakout
 
         void OnEnable()
         {
-            RandomizeDirection();
 
             BallsInSession.Add(this);
 
             RefreshBallScale();
 
             _spawnPoint = transform.position;
+
+            ResetDirection();
         }
 
         void OnDisable()
@@ -109,11 +115,24 @@ namespace SuperBreakout
 
             ContactPoint2D contactPoint = collision.GetContact(0);
 
-            _direction = Vector2.Reflect(_direction, contactPoint.normal).normalized;
+            _direction = Vector2.Reflect(_direction, contactPoint.normal).normalized + new Vector2(Random.Range(-0.01f, 0.01f), Random.Range(-0.01f, 0.01f));
 
             ObjectPoolManager.GetObjectPool(ImpactEffect).transform.position = contactPoint.point;
 
             SoundManager.Instance.PlaySound(_impactSound);
+        }
+
+
+        void ResetDirection()
+        {
+            if (_isRandomDirectionAtSpawn)
+            {
+                RandomizeDirection();
+            }
+            else
+            {
+                _direction = new Vector2(1f, 1f);
+            }
         }
 
         void RandomizeDirection()
@@ -132,7 +151,7 @@ namespace SuperBreakout
         {
             SoundManager.Instance.PlaySound(_respawnSound);
             transform.position = _spawnPoint;
-            RandomizeDirection();
+            ResetDirection();
         }
 
         #endregion

@@ -1088,6 +1088,10 @@ PrefabInstance:
       propertyPath: ImpactEffect
       value: 
       objectReference: {fileID: 6521028492224768712, guid: 0299a7425469b27459762e14e2a6f942, type: 3}
+    - target: {fileID: 5266401167819957047, guid: e44c35b0805a8434d94bf916e99bdc9f, type: 3}
+      propertyPath: _isRandomDirectionAtSpawn
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e44c35b0805a8434d94bf916e99bdc9f, type: 3}
 --- !u!1 &389684878
@@ -2727,6 +2731,10 @@ PrefabInstance:
       propertyPath: ImpactEffect
       value: 
       objectReference: {fileID: 6521028492224768712, guid: 0299a7425469b27459762e14e2a6f942, type: 3}
+    - target: {fileID: 5266401167819957047, guid: e44c35b0805a8434d94bf916e99bdc9f, type: 3}
+      propertyPath: _isRandomDirectionAtSpawn
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e44c35b0805a8434d94bf916e99bdc9f, type: 3}
 --- !u!1001 &1205780287
@@ -3041,6 +3049,10 @@ PrefabInstance:
       propertyPath: ImpactEffect
       value: 
       objectReference: {fileID: 6521028492224768712, guid: 0299a7425469b27459762e14e2a6f942, type: 3}
+    - target: {fileID: 5266401167819957047, guid: e44c35b0805a8434d94bf916e99bdc9f, type: 3}
+      propertyPath: _isRandomDirectionAtSpawn
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e44c35b0805a8434d94bf916e99bdc9f, type: 3}
 --- !u!1 &1273305940
@@ -3184,6 +3196,10 @@ PrefabInstance:
       propertyPath: ImpactEffect
       value: 
       objectReference: {fileID: 6521028492224768712, guid: 0299a7425469b27459762e14e2a6f942, type: 3}
+    - target: {fileID: 5266401167819957047, guid: e44c35b0805a8434d94bf916e99bdc9f, type: 3}
+      propertyPath: _isRandomDirectionAtSpawn
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e44c35b0805a8434d94bf916e99bdc9f, type: 3}
 --- !u!1001 &1327888393
@@ -3261,6 +3277,10 @@ PrefabInstance:
       propertyPath: ImpactEffect
       value: 
       objectReference: {fileID: 6521028492224768712, guid: 0299a7425469b27459762e14e2a6f942, type: 3}
+    - target: {fileID: 5266401167819957047, guid: e44c35b0805a8434d94bf916e99bdc9f, type: 3}
+      propertyPath: _isRandomDirectionAtSpawn
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e44c35b0805a8434d94bf916e99bdc9f, type: 3}
 --- !u!1 &1343341398
@@ -5127,6 +5147,10 @@ PrefabInstance:
     - target: {fileID: 5266401167819957046, guid: e44c35b0805a8434d94bf916e99bdc9f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266401167819957047, guid: e44c35b0805a8434d94bf916e99bdc9f, type: 3}
+      propertyPath: _isRandomDirectionAtSpawn
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e44c35b0805a8434d94bf916e99bdc9f, type: 3}

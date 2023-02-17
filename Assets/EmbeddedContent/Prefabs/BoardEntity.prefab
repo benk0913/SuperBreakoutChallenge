@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3420325784133462390}
   m_Layer: 0
   m_Name: BoardEntity
-  m_TagString: Ball
+  m_TagString: Board
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3420325784133462384}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -108,7 +108,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 6
 --- !u!96 &8737444841723340777
 TrailRenderer:
   serializedVersion: 2
@@ -257,7 +257,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 3420325784133462385}
   _collider: {fileID: 7377305038172850756}
   _renderer: {fileID: 3420325784133462387}
-  _baseSpeed: 5
+  _baseSpeed: 10
 --- !u!114 &3420325784133462389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +278,7 @@ PlatformEffector2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3420325784133462384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2

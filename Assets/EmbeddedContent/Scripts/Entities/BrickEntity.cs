@@ -31,8 +31,12 @@ namespace SuperBreakout
         [SerializeField]
         int _MaxHP;
 
-        [SerializeField][Tooltip("Execute those game actions on break")]
+        [SerializeField]
+        [Tooltip("Execute those game actions on break")]
         List<GameAction> GameActionsOnBreak;
+
+        public static List<BrickEntity> BricksInSession = new List<BrickEntity>();
+
 
         int _currentHP;
 
@@ -43,6 +47,16 @@ namespace SuperBreakout
         void Start()
         {
             Initialize();
+        }
+
+        void OnEnable()
+        {
+            BricksInSession.Add(this);
+        }
+
+        void OnDisable()
+        {
+            BricksInSession.Remove(this);
         }
 
 
@@ -79,7 +93,7 @@ namespace SuperBreakout
             ObjectPoolManager.GetObjectPool(BreakEffect).transform.position = transform.position;
             this.gameObject.SetActive(false);
             SoundManager.Instance.PlaySound(_breakSound);
-            GameActionsOnBreak.ForEach(x=>x.Execute());
+            GameActionsOnBreak.ForEach(x => x.Execute());
         }
 
         private void Initialize()

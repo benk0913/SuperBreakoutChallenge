@@ -16,7 +16,27 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 938f65daed22e874a8a20699093bbc1e
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 3793bb7e2d96b574995016944c998a2d
+    m_Address: level_1_music
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+  - m_GUID: e44c35b0805a8434d94bf916e99bdc9f
+    m_Address: Ball
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+  - m_GUID: 0299a7425469b27459762e14e2a6f942
+    m_Address: ImpactEffect
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+  - m_GUID: 7f923bf63b988214f849bd055ad4f86b
+    m_Address: BreakEffect
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ac727ba9e057b5e428a16aea90be9716, type: 2}
   m_SchemaSet:
