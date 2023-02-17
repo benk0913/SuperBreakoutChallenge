@@ -30,9 +30,15 @@ namespace SuperBreakout
         [SerializeField]
         public LevelCampaign _campaign;
 
-        public int CurrentLevel {private set; get;}
-        public int CurrentScore {private set; get;}
-        public int CurrentLives {private set; get;}
+        [SerializeField]
+        AudioClip WinJingle;
+
+        [SerializeField]
+        AudioClip LoseJingle;
+
+        public int CurrentLevel { private set; get; }
+        public int CurrentScore { private set; get; }
+        public int CurrentLives { private set; get; }
 
         #endregion
 
@@ -57,21 +63,50 @@ namespace SuperBreakout
 
             SceneManager.sceneLoaded += OnSceneLoaded;
 
-            LoadScene(MAIN_MENU_SCENE);
+            GoToMainMenu();
 
             _isInitialized = true;
+        }
+
+        #region Level Navigation
+
+        void GoToMainMenu()
+        {
+            LoadScene(MAIN_MENU_SCENE);
         }
 
         void NewGame()
         {
             SetLevel(0);
-            SetScore(0);
+            SetScore(0);            
             SetLives(1);
 
-            LoadScene(_campaign.Levels[CurrentLevel].LevelSceneKey);
+            SetGameLevel(_campaign.Levels[CurrentLevel]);
+            
         }
 
-        #region  Gamewide Scene Management
+        void GoToNextLevel()
+        {
+            CurrentLevel++;
+
+            if(_campaign.Levels.Count <= CurrentLevel)
+            {
+                GoToMainMenu();
+                return;
+            }
+
+            SetGameLevel(_campaign.Levels[CurrentLevel]);
+        }
+
+        void SetGameLevel(LevelInstance levelInstance)
+        {
+            SetLives(levelInstance.Lives);
+            LoadScene(levelInstance.LevelSceneKey);
+        }
+
+        #endregion
+
+              #region  Gamewide Scene Management
         void OnSceneLoaded(Scene loadedScene, LoadSceneMode mode)
         {
             UILoadingWindow.Instance?.RemoveLoader(UILoadingWindow.CommonLoadOperations.LOAD_SCENE);
@@ -154,25 +189,109 @@ namespace SuperBreakout
             _timelineHandlerRoutineInstance = null;
         }
 
+        static void ShowNotInitializedError()
+        {
+            Debug.LogError("Game Manager not initialized!");
+        }
+
         #endregion
 
-        public void SetLives(int lives)
+        public static void SetLives(int lives)
         {
-            CurrentLives = lives;
-            UIIngameView.SetLives(CurrentLives);
+            if (!_isInitialized)
+            {
+                ShowNotInitializedError();
+                return;
+            }
+
+            Instance.CurrentLives = lives;
+            UIIngameView.SetLives(Instance.CurrentLives);
         }
 
-        public void SetScore(int score)
+        public static void SetScore(int score)
         {
-            CurrentScore = score;
-            UIIngameView.SetScore(CurrentScore);
+            if (!_isInitialized)
+            {
+                ShowNotInitializedError();
+                return;
+            }
+
+            Instance.CurrentScore = score;
+            UIIngameView.SetScore(Instance.CurrentScore);
         }
 
-        public void SetLevel(int level)
+        public static void SetLevel(int level)
         {
-            CurrentLevel = level;
-            UIIngameView.SetLevel(CurrentScore);
+            if (!_isInitialized)
+            {
+                ShowNotInitializedError();
+                return;
+            }
+
+            Instance.CurrentLevel = level;
+            UIIngameView.SetLevel(Instance.CurrentScore);
         }
+
+        public static void LoseLife()
+        {
+            if (!_isInitialized)
+            {
+                ShowNotInitializedError();
+                return;
+            }
+
+            Instance.CurrentLives--;
+            if (Instance.CurrentLives <= 0)
+            {
+                Instance.LoseLevel();
+            }
+        }
+
+        void WinLevel()
+        {
+            if (_winLevelRoutineInstance != null) StopCoroutine(_winLevelRoutineInstance);
+
+            _winLevelRoutineInstance = StartCoroutine(WinLevelRoutine());
+        }
+
+        Coroutine _winLevelRoutineInstance;
+        IEnumerator WinLevelRoutine()
+        {
+            SoundManager.Instance.PlaySound(WinJingle);
+            Time.timeScale = 0f;
+
+            yield return new WaitForSecondsRealtime(3f);
+
+            Time.timeScale = 1f;
+
+            GoToNextLevel();
+
+            _loseLevelRoutineInstance = null;
+        }
+
+        void LoseLevel()
+        {
+            if (_loseLevelRoutineInstance != null) StopCoroutine(_loseLevelRoutineInstance);
+
+            _loseLevelRoutineInstance = StartCoroutine(LoseLevelRoutine());
+        }
+
+        Coroutine _loseLevelRoutineInstance;
+        IEnumerator LoseLevelRoutine()
+        {
+            SoundManager.Instance.PlaySound(LoseJingle);
+            Time.timeScale = 0f;
+
+            yield return new WaitForSecondsRealtime(3f);
+
+            Time.timeScale = 1f;
+
+            GoToMainMenu();
+
+            _loseLevelRoutineInstance = null;
+        }
+
+
 
         #endregion
 

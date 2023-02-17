@@ -7,7 +7,6 @@ namespace SuperBreakout
 {
     public class BrickEntity : MonoBehaviour
     {
-        public const string BALL_TAG = "Ball";
 
         #region  Parameters
         [SerializeField]
@@ -55,7 +54,7 @@ namespace SuperBreakout
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.collider.tag != BALL_TAG) return;
+            if (collision.collider.tag != BallEntity.BALL_TAG) return;
 
             _currentHP--;
 

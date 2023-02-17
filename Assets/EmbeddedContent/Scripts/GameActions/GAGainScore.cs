@@ -9,12 +9,10 @@ namespace SuperBreakout
     {
         public override void Execute()
         {
-            if (GameManager.Instance == null) return;
-
             int scoreAdded = 0;
             if (int.TryParse(_value, out scoreAdded))
             {
-                GameManager.Instance.SetScore(GameManager.Instance.CurrentScore+scoreAdded);
+                GameManager.SetScore(GameManager.Instance.CurrentScore+scoreAdded);
             }
             else
             {

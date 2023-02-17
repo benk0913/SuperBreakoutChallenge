@@ -9,6 +9,8 @@ namespace SuperBreakout
 
         const float IMPACT_COOLDOWN = 0.1f;
 
+        public const string BALL_TAG = "Ball";
+
         public static List<BallEntity> BallsInSession = new List<BallEntity>();
 
         [SerializeField]
@@ -31,12 +33,18 @@ namespace SuperBreakout
         [Tooltip("Sound on ball hit")]
         AudioClip _impactSound;
 
+        [SerializeField]
+        [Tooltip("Respawn Sound")]
+        AudioClip _respawnSound;
+
 
         float _modifiedScale = 1f;
 
         Vector2 _direction;
 
         float _impactCooldown;
+
+        Vector2 _spawnPoint;
 
         float BallScale
         {
@@ -63,6 +71,8 @@ namespace SuperBreakout
             BallsInSession.Add(this);
 
             RefreshBallScale();
+
+            _spawnPoint = transform.position;
         }
 
         void OnDisable()
@@ -116,6 +126,13 @@ namespace SuperBreakout
         private void RefreshBallScale()
         {
             transform.localScale = Vector3.one * BallScale;
+        }
+
+        internal void Respawn()
+        {
+            SoundManager.Instance.PlaySound(_respawnSound);
+            transform.position = _spawnPoint;
+            RandomizeDirection();
         }
 
         #endregion
