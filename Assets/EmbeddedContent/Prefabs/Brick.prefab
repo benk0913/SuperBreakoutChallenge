@@ -98,11 +98,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer: {fileID: 4489819472150482640}
   BreakEffect: {fileID: 6521028492224768712, guid: 7f923bf63b988214f849bd055ad4f86b, type: 3}
+  _impactSound: {fileID: 8300000, guid: e425283c38843c14195aed86c3311413, type: 3}
+  _breakSound: {fileID: 8300000, guid: 8d497a178e7b5bd4b84202e299706278, type: 3}
   _damageProgressSprites:
   - {fileID: -5700451112235475842, guid: a31f223e9d81fc74ab58a68ee9c45f79, type: 3}
   - {fileID: -8155179776209601898, guid: a31f223e9d81fc74ab58a68ee9c45f79, type: 3}
   - {fileID: -3185777907216620351, guid: a31f223e9d81fc74ab58a68ee9c45f79, type: 3}
   _MaxHP: 4
+  GameActionsOnBreak:
+  - {fileID: 11400000, guid: 639fe7b725a19004c9686c8360b6804e, type: 2}
 --- !u!61 &4489819472150482643
 BoxCollider2D:
   m_ObjectHideFlags: 0
