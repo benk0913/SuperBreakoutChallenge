@@ -65,7 +65,9 @@ namespace SuperBreakout
                 return;
             }
 
-            _instance._levelLabel.text = "Level: " + (level + 1).ToString("N0");
+            level++; // So levels wont start from 0.
+
+            _instance._levelLabel.text = "Level: " + level.ToString("N0");
         }
 
         public static void SetScore(int score)

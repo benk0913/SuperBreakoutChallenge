@@ -26,7 +26,10 @@ namespace SuperBreakout
         static bool _isInitialized;
 
         [SerializeField]
-        GameObject AudioInstancePrefab;
+        GameObject _audioInstancePrefab;
+        
+        [SerializeField]
+        AudioSource _musicSource;
 
         #endregion
 
@@ -51,8 +54,14 @@ namespace SuperBreakout
 
         public void PlaySound(AudioClip clip)
         {
-            GameObject soundInstance = ObjectPoolManager.GetObjectPool(AudioInstancePrefab);
+            GameObject soundInstance = ObjectPoolManager.GetObjectPool(_audioInstancePrefab);
             soundInstance.GetComponent<SoundInstance>().SetInfo(clip, () => soundInstance.SetActive(false));
+        }
+
+        public void SetMusic(AudioClip clip)
+        {
+            _musicSource.clip = clip;
+            _musicSource.Play();
         }
 
         #endregion

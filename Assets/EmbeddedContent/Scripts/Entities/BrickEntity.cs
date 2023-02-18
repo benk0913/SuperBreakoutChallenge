@@ -49,16 +49,6 @@ namespace SuperBreakout
             Initialize();
         }
 
-        void OnEnable()
-        {
-            BricksInSession.Add(this);
-        }
-
-        void OnDisable()
-        {
-            BricksInSession.Remove(this);
-        }
-
 
 
         #endregion
@@ -94,10 +84,15 @@ namespace SuperBreakout
             this.gameObject.SetActive(false);
             SoundManager.Instance.PlaySound(_breakSound);
             GameActionsOnBreak.ForEach(x => x.Execute());
+            
+            BricksInSession.Remove(this);
+            Util.InvokeEvent(Util.CommonEvents.BRICK_DESTROYED);
         }
 
         private void Initialize()
         {
+            BricksInSession.Add(this);
+
             _currentHP = _MaxHP;
             RefrshHPState();
         }

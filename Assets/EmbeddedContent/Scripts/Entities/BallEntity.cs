@@ -41,6 +41,10 @@ namespace SuperBreakout
         [Tooltip("Should the ball go to a random direction when it spawns?")]
         bool _isRandomDirectionAtSpawn;
 
+        [SerializeField]
+        [Tooltip("Should the respawn when lost?")]
+        bool _isRespawning = true;
+
 
 
         float _modifiedScale = 1f;
@@ -103,6 +107,19 @@ namespace SuperBreakout
             RefreshBallScale();
         }
 
+        public void Respawn()
+        {
+            if (!_isRespawning)
+            {
+                this.gameObject.SetActive(false);
+                return;
+            }
+
+            SoundManager.Instance.PlaySound(_respawnSound);
+            transform.position = _spawnPoint;
+            ResetDirection();
+        }
+
         #endregion
 
         #region  Behaviour
@@ -147,12 +164,7 @@ namespace SuperBreakout
             transform.localScale = Vector3.one * BallScale;
         }
 
-        internal void Respawn()
-        {
-            SoundManager.Instance.PlaySound(_respawnSound);
-            transform.position = _spawnPoint;
-            ResetDirection();
-        }
+
 
         #endregion
 

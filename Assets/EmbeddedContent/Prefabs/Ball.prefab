@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5266401167819957042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.3497076, y: 2.9664292, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: -6063165555285523499, guid: 3feb2dfbda3c9ca47a8c8d71232830d1, type: 3}
-  m_Color: {r: 0.99215686, g: 0.14541268, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -106,7 +106,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &5266401167819957047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +124,8 @@ MonoBehaviour:
   _baseScale: 0.5
   ImpactEffect: {fileID: 6521028492224768712, guid: 0299a7425469b27459762e14e2a6f942, type: 3}
   _impactSound: {fileID: 8300000, guid: d4c07c2f765750340b9e63b13ad629a7, type: 3}
+  _respawnSound: {fileID: 0}
+  _isRandomDirectionAtSpawn: 0
 --- !u!96 &2243021390502636971
 TrailRenderer:
   serializedVersion: 2

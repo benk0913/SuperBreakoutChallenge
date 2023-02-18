@@ -27,7 +27,7 @@ namespace SuperBreakout
 
                 for (int i = 0; i < count; i++)
                 {
-                    ResourcesManager.Instance.LoadObject(_ballPrefabKey, (GameObject loadedBall)=>{loadedBall.transform.position = spawn;});
+                    ResourcesManager.Instance.LoadObject(_ballPrefabKey, (GameObject loadedBall) => { Instantiate(loadedBall).transform.position = spawn; });
                 }
             }
             else

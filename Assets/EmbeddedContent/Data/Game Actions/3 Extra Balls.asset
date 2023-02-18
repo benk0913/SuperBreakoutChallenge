@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: 3 Extra Balls
   m_EditorClassIdentifier: 
   _value: 3
-  _ballPrefabKey: Ball
+  _ballPrefabKey: BonusBall

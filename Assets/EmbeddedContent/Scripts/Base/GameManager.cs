@@ -105,7 +105,20 @@ namespace SuperBreakout
         void SetGameLevel(LevelInstance levelInstance)
         {
             SetLives(levelInstance.Lives);
+            
+            BrickEntity.BricksInSession?.Clear();
+
             LoadScene(levelInstance.LevelSceneKey);
+
+            if (!string.IsNullOrEmpty(levelInstance.BackgroundMusicKey))
+            {
+                UILoadingWindow.Instance.AddLoader(levelInstance.BackgroundMusicKey);
+                ResourcesManager.Instance.LoadSound(levelInstance.BackgroundMusicKey, (AudioClip musicClip) =>
+                {
+                    UILoadingWindow.Instance.RemoveLoader(levelInstance.BackgroundMusicKey);
+                    SoundManager.Instance.SetMusic(musicClip);
+                });
+            }
         }
 
         #endregion
@@ -124,8 +137,6 @@ namespace SuperBreakout
             {
                 Util.InvokeEvent(Util.CommonEvents.GAME_LEVEL_LOADED);
                 ResetTimelineHandler();
-
-                SetLives(CurrentLives = _campaign.Levels[CurrentLevel].Lives);
             }
         }
 
@@ -176,6 +187,12 @@ namespace SuperBreakout
                 {
                     TimeLineEvent timelineEvent = _campaign.Levels[CurrentLevel].TimeLineEvents[eventIndex];
                     timelineEvent.ActionsOnEvent.ForEach(x => x.Execute());
+
+                    if (!string.IsNullOrEmpty(timelineEvent.NotificationText))
+                    {
+                        UINotificationView.ShowNotification(timelineEvent.NotificationText);
+                    }
+
                     eventIndex++;
                     if (eventIndex >= _campaign.Levels[CurrentLevel].TimeLineEvents.Count)
                     {
@@ -247,7 +264,8 @@ namespace SuperBreakout
 
             SoundManager.Instance.PlaySound(Instance._loseLifeSound);
 
-            Instance.CurrentLives--;
+            SetLives(Instance.CurrentLives-1);
+
             if (Instance.CurrentLives <= 0)
             {
                 Instance.LoseLevel();
@@ -256,13 +274,15 @@ namespace SuperBreakout
 
         void OnBrickDestroyed()
         {
+            
+            Debug.LogError("DESTROYED "+BrickEntity.BricksInSession.Count+" bricks left");
             if (BrickEntity.BricksInSession == null) return;
 
             if (BrickEntity.BricksInSession.Count > 0) return;
 
             WinLevel();
         }
-        
+
         void WinLevel()
         {
             if (_winLevelRoutineInstance != null) StopCoroutine(_winLevelRoutineInstance);
@@ -273,6 +293,8 @@ namespace SuperBreakout
         Coroutine _winLevelRoutineInstance;
         IEnumerator WinLevelRoutine()
         {
+            UINotificationView.ShowNotification("Level Complete!");
+
             SoundManager.Instance.PlaySound(WinJingle);
             Time.timeScale = 0.5f;
 
@@ -295,6 +317,9 @@ namespace SuperBreakout
         Coroutine _loseLevelRoutineInstance;
         IEnumerator LoseLevelRoutine()
         {
+            UINotificationView.ShowNotification("Game Over");
+
+            SoundManager.Instance.SetMusic(null);
             SoundManager.Instance.PlaySound(LoseJingle);
             Time.timeScale = 0.5f;
 
@@ -325,6 +350,7 @@ namespace SuperBreakout
         public class LevelInstance
         {
             public string LevelSceneKey;
+            public string BackgroundMusicKey;
             public int Lives;
             public List<TimeLineEvent> TimeLineEvents = new List<TimeLineEvent>();
         }
@@ -333,6 +359,7 @@ namespace SuperBreakout
         public class TimeLineEvent
         {
             public float TimeSinceLevelStart;
+            public string NotificationText;
             public List<GameAction> ActionsOnEvent = new List<GameAction>();
         }
 
