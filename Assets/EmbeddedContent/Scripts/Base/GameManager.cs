@@ -63,6 +63,7 @@ namespace SuperBreakout
             Application.targetFrameRate = 60;
 
             Util.SubscribeToEvent(Util.CommonEvents.NEW_GAME, NewGame);
+            Util.SubscribeToEvent(Util.CommonEvents.GAME_OVER, LoseLevel);
             Util.SubscribeToEvent(Util.CommonEvents.BRICK_DESTROYED, OnBrickDestroyed);
 
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -268,7 +269,7 @@ namespace SuperBreakout
 
             if (Instance.CurrentLives <= 0)
             {
-                Instance.LoseLevel();
+                Util.InvokeEvent(Util.CommonEvents.GAME_OVER);
             }
         }
 
@@ -285,7 +286,7 @@ namespace SuperBreakout
 
         void WinLevel()
         {
-            if (_winLevelRoutineInstance != null) StopCoroutine(_winLevelRoutineInstance);
+            if (_winLevelRoutineInstance != null) return;
 
             _winLevelRoutineInstance = StartCoroutine(WinLevelRoutine());
         }
@@ -309,7 +310,7 @@ namespace SuperBreakout
 
         void LoseLevel()
         {
-            if (_loseLevelRoutineInstance != null) StopCoroutine(_loseLevelRoutineInstance);
+            if (_loseLevelRoutineInstance != null) return;
 
             _loseLevelRoutineInstance = StartCoroutine(LoseLevelRoutine());
         }

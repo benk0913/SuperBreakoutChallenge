@@ -92,6 +92,11 @@ namespace SuperBreakout
             _instance._lastScore = score;
         }
 
+        public void AttemptQuit()
+        {
+            Util.InvokeEvent(Util.CommonEvents.GAME_OVER);
+        }
+
         #endregion
 
         #region  Internal
